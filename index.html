@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="ngDashboard" ng-controller="MainController as ctrl">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ctrl.title}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+<div gridster>
+	<ul>
+		<li style="border:1px solid black;" gridster-item="item" ng-repeat="item in ctrl.standardItems"> <div google-chart chart="ctrl.chart" style= "{{ctrl.chart.cssStyle}}"> </div></li>
+	</ul>
+</div>
+   
+    <!--jqyery-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+    <!--Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+
+    <!--Angular material-->
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+
+    <!-- Gridster library-->
+    <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+
+    <!--Google chart-->
+    <script src="bower_components/angular-google-chart/ng-google-chart.min.js"></script>
+
+    <!--APP js-->
+    <script src="./app/app.module.js"></script>
+    <script src="./app/app.ctrl.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "generic-dashboard",
+  "version": "1.0.0",
+  "description": "this is a generic dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tanvir Kalam",
+  "license": "ISC",
+  "dependencies": {    
+  }
+}
