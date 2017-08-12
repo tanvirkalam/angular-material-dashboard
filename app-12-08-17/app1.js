@@ -3,8 +3,7 @@
 var app = angular.module('google-chart-sample', ['gridster', 'ngMaterial', 'googlechart', 'ngMdIcons']).value('googleChartApiConfig', {
     version: '1',
     optionalSettings: {
-        packages: ['corechart'],
-        language: 'en'
+        packages: ['corechart']
     }
 });
 

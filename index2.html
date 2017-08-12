@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="ngDashboard" ng-controller="MainController as ctrl" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="ngDashboard" ng-controller="MainController as ctrl">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ctrl.title}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <!--<md-card>
+                    <md-toolbar class="md-warn" style="border-radius: 3px 3px 0 0">
+                        <md-card-header>
+                            <md-card-header-text>
+                                <span class="md-title">User</span>
+                                <span class="md-subhead">subhead</span>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-toolbar>
+                    <div google-chart chart="ctrl.chart" style="{{ctrl.chart.cssStyle}}"> </div>
+                </md-card>-->
+
+
+    <!--<img ng-src="assets/img/image.jpg" class="md-card-image" alt="">-->
+    <!--<div flex>
+                    <div google-chart chart="ctrl.chart"> </div>
+                    <div>-->
+
+    <md-content flex gridster="gridsterOptions">
+        <md-card style='height: 100%; width: 100%;' gridster-item="item" ng-repeat="item in ctrl.standardItems" flex>
+            <md-card-content>
+                <md-toolbar class="md-warn" style="border-radius: 3px 3px 0 0">
+                    <md-card-header>
+                        <!--<md-card-avatar>
+                                <img class="md-user-avatar" src="image-source">
+                            </md-card-avatar>-->
+                        <md-card-header-text>
+                            <span class="md-title">title</span>
+                            <span class="md-subhead">sub-title</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-toolbar>
+                <!-- <canvas id="doughnut" class="chart chart-doughnut" data="data"
+                      labels="labels"></canvas> -->
+                <div google-chart chart="ctrl.chart"> </div>
+                <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series"
+                    chart-click="onClick">
+                </canvas>
+            </md-card-content>
+        </md-card>
+    </md-content>
+
+
+    <!--<md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">card-headline</span>
+                            <span class="md-subhead">card-subheadline</span>
+                        </md-card-title-text>
+                    </md-card-title>-->
+    <!--<md-card-actions layout="" layout-align="end center">
+                        <md-button>Action 1</md-button>
+                        <md-button>Action 2</md-button>
+                        <md-card-icon-actions>
+                            <md-button class="button-class" aria-label="label">
+                                content
+                            </md-button>
+                        </md-card-icon-actions>
+                    </md-card-actions>-->
+    <!--<md-card-content>
+                         <div google-chart chart="ctrl.chart" flex> </div>
+                    </md-card-content>-->
+    </md-card>
+
+
+
+
+    <!--jqyery-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+    <!--Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+
+    <!--Angular material-->
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+
+    <!-- Gridster library-->
+    <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+
+    <!--Google chart-->
+    <script src="bower_components/angular-google-chart/ng-google-chart.min.js"></script>
+
+    <!--APP js-->
+    <script src="./app/app.module.js"></script>
+    <script src="./app/app.ctrl.js"></script>
+
+</body>
+
+</html>

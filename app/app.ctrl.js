@@ -2,46 +2,26 @@
     'use strict';
 
     angular
-        .module('ngDashboard')
-        .controller('MainController', mainController)
-        .controller("SampleCtrl", function ($scope, $http) {
+        .module('ngDashboard')      
+        .controller('MainController', MainController);
 
-            $scope.init = function () {
-                $http.get('data.json').success(function (data) {
-                    $scope.chart = data;
-                });
-                $http.get('data1.json').success(function (data) {
-                    $scope.chart1 = data;
-                });
-            };
+    MainController.$inject = ['$http', '$timeout', '$mdDialog', 'DataService'];
 
-            $scope.init();
-            $scope.selected = function (selectedItem) {
-                alert("You selected " + $scope.chart.data.cols[selectedItem.column].label + " in " +
-                    $scope.chart.data.rows[selectedItem.row].c[0].v);
-            };
-
-
-            $scope.selected1 = function (selectedItem) {
-                alert("You selected " + $scope.chart1.data.cols[selectedItem.column].label + " in " +
-                    $scope.chart1.data.rows[selectedItem.row].c[0].v);
-            };
-
-            $scope.chartReady = function () {};
-
-
-        });;
-
-    mainController.$inject = ['$rootScope', '$scope'];
-
-    function mainController($rootScope, $scope) {
+    function MainController($http, $timeout, $mdDialog, DataService) {
         var vm = this;
+
+        //gridster option
         vm.gridsterOptions = {
-            margins: [20, 20],
             columns: 4,
-            mobileModeEnabled: false,
+            isMobile: false, // stacks the grid items if true
+            mobileBreakPoint: 480, // if the screen is not wider that this, remove the grid layout and stack the items
+            mobileModeEnabled: true, // whether or not to toggle mobile mode when screen width is less than mobileBreakPoint
             draggable: {
-                handle: 'h3'
+                enabled: true, // whether dragging items is supported
+                handle: 'h3', // optional selector for drag handle
+                start: function (event, $element, widget) {}, // optional callback fired when drag is started,
+                drag: function (event, $element, widget) {}, // optional callback fired when item is moved,
+                stop: function (event, $element, widget) {} // optional callback fired when item is finished dragging
             },
             resizable: {
                 enabled: true,
@@ -52,206 +32,75 @@
 
                 // optional callback fired when item is resized,
                 resize: function (event, $element, widget) {
-                    if (widget.chart.api) widget.chart.api.update();
+                    // if (widget.chart.api) widget.chart.api.update();
+                    widget.chart.options.width = $element.width();
+                    widget.chart.options.height = $element.height() - 50;
                 },
 
                 // optional callback fired when item is finished resizing 
                 stop: function (event, $element, widget) {
+
+                    //widget.chart.type = widget.chart.type;
+                    console.log($element, widget);
+                    //      googleService.getReadyPromise()
+                    // .then(draw);               
                     $timeout(function () {
-                        if (widget.chart.api) widget.chart.api.update();
-                    }, 400)
+                        widget.chart.options.width = $element.width();
+                        widget.chart.options.height = $element.height() - 50;
+                    }, 700);
                 }
             },
         };
-        vm.title = "Generic Dashboard";
-        var chart1 = {};
-        chart1.type = "ColumnChart";
-        // chart1.cssStyle = "height:200px; width:300px;";
-        chart1.data = {
-            "cols": [{
-                    id: "month",
-                    label: "Month",
-                    type: "string"
-                },
-                {
-                    id: "laptop-id",
-                    label: "Laptop",
-                    type: "number"
-                },
-                {
-                    id: "desktop-id",
-                    label: "Desktop",
-                    type: "number"
-                },
-                {
-                    id: "server-id",
-                    label: "Server",
-                    type: "number"
-                },
-                {
-                    id: "cost-id",
-                    label: "Shipping",
-                    type: "number"
-                }
-            ],
-            "rows": [{
-                    c: [{
-                            v: "January"
-                        },
-                        {
-                            v: 19,
-                            f: "42 items"
-                        },
-                        {
-                            v: 12,
-                            f: "Ony 12 items"
-                        },
-                        {
-                            v: 7,
-                            f: "7 servers"
-                        },
-                        {
-                            v: 4
-                        }
-                    ]
-                },
-                {
-                    c: [{
-                            v: "February"
-                        },
-                        {
-                            v: 13
-                        },
-                        {
-                            v: 1,
-                            f: "1 unit (Out of stock this month)"
-                        },
-                        {
-                            v: 12
-                        },
-                        {
-                            v: 2
-                        }
-                    ]
-                },
-                {
-                    c: [{
-                            v: "March"
-                        },
-                        {
-                            v: 24
-                        },
-                        {
-                            v: 0
-                        },
-                        {
-                            v: 11
-                        },
-                        {
-                            v: 6
-                        }
+        vm.dashboardItems = [];
 
-                    ]
-                }
-            ]
-        };
-        $rootScope.$on('gridster-resized', function (sizes, gridster) {
-            console.log(sizes, gridster);
-            // sizes[0] = width
-            // sizes[1] = height
-            // gridster.
-        });
-        $rootScope.$on('gridster-item-initialized', function (item) {
-            console.log(item);
-            // item.$element
-            // item.gridster
-            // item.row
-            // item.col
-            // item.sizeX
-            // item.sizeY
-            // item.minSizeX
-            // item.minSizeY
-            // item.maxSizeX
-            // item.maxSizeY
-        });
-
-        $rootScope.$on('gridster-item-resized', function (item) {
-            console.log(item);
-            // item.$element
-            // item.gridster
-            // item.row
-            // item.col
-            // item.sizeX
-            // item.sizeY
-            // item.minSizeX
-            // item.minSizeY
-            // item.maxSizeX
-            // item.maxSizeY
-        });
-        $rootScope.$on('gridster-item-transition-end', function (item) {
-            console.log(item);
-            // item.$element
-            // item.gridster
-            // item.row
-            // item.col
-            // item.sizeX
-            // item.sizeY
-            // item.minSizeX
-            // item.minSizeY
-            // item.maxSizeX
-            // item.maxSizeY
-        });
-
-        $scope.$watch(function () {
-            return vm.standardItems;
-        }, function (items) {
-            // one of the items changed
-            console.log(items);
-        }, true);
-
-        chart1.options = {
-            "title": "Sales per month",
-            "isStacked": "true",
-            "fill": 20,
-            "displayExactValues": true,
-            "vAxis": {
-                "title": "Sales unit",
-                "gridlines": {
-                    "count": 6
-                }
-            },
-            "hAxis": {
-                "title": "Date"
-            }
-        };
-
-        chart1.formatters = {};
-
-        vm.chart = chart1;
-
-        vm.standardItems = [{
-                sizeX: 4,
-                sizeY: 2,
-                row: 0,
-                col: 0
-            },
-            {
-                sizeX: 2,
-                sizeY: 2,
-                row: 0,
-                col: 2
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 0,
-                col: 4
-            }
-        ];
         activate();
 
         ////////////////
 
-        function activate() {}
+        function activate() {
+            DataService.getFakeData('data').then(function (data) {
+                var item = {
+                    sizeX: 1,
+                    sizeY: 1,
+                    row: 0,
+                    col: 0,
+                    chart: angular.copy(data.data)
+                };
+                vm.dashboardItems.push(item); 
+
+                 var item = {
+                    sizeX: 1,
+                    sizeY: 1,
+                    row: 0,
+                    col: 1,
+                    chart: angular.copy(data.data)
+                };
+                item.chart.type = 'PieChart';
+                vm.dashboardItems.push(item);
+
+                var item = {
+                    sizeX: 1,
+                    sizeY: 1,
+                    row: 0,
+                    col: 2,
+                    chart: angular.copy(data.data)
+                };
+                item.chart.type = 'LineChart';
+                vm.dashboardItems.push(item);
+
+            });
+
+            
+             DataService.getFakeData('data1').then(function (data) {
+                var item = {
+                    sizeX: 1,
+                    sizeY: 1,
+                    row: 0,
+                    col: 3,
+                    chart: data.data
+                };
+                vm.dashboardItems.push(item); 
+            });
+        }
     }
 })();
