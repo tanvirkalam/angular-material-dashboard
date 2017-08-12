@@ -1,0 +1,130 @@
+{
+  "type": "ColumnChart",
+  "displayed": false,
+  "cssStyle": "width: 100%",  
+  "data": {
+    "cols": [{
+      "label": "Status",
+      "type": "string"
+    }, {
+      "id": "T",
+      "label": "Ticketed",
+      "type": "number"
+    }, {
+      "label": "Request Refund",
+      "type": "number"
+    }, {
+      "label": "Pnr Failed",
+      "type": "number"
+    }, {
+      "label": "Ok To Ticket",
+      "type": "number"
+    }, {
+      "label": "Cancelled By Supplier",
+      "type": "number"
+    }, {
+      "label": "Cancelled",
+      "type": "number"
+    }, {
+      "label": "On Hold",
+      "type": "number"
+    }, {
+      "label": "Request Itinerary Change",
+      "type": "number"
+    }, {
+      "label": "Vouchered",
+      "type": "number"
+    }, {
+      "label": "Confirmed",
+      "type": "number"
+    }, {
+      "label": "On Hold",
+      "type": "number"
+    }, {
+      "label": "Cancel Request",
+      "type": "number"
+    }],
+    "rows": [{
+      "c": [{
+        "v": "Air",
+        "id":"A"
+      }, {
+        "v": 1000
+      }, {
+        "v": 1500
+      }, {
+        "v": 2000
+      }, {
+        "v": 1000
+      }, {
+        "v": 1000
+      }, {
+        "v": 1000
+      }]
+    }, {
+      "c": [{
+        "v": "Hotel"
+      }, {
+        "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+         "v": "0"
+      }, {
+        "v": 1000
+      }, {
+        "v": 1000
+      }]
+    }, {
+      "c": [{
+        "v": "Transfer"
+      }, {
+        "v": 0
+      }]
+    }, {
+      "c": [{
+        "v": "Sightseeing"
+      }, {
+        "v": 0
+      }]
+    }, {
+      "c": [{
+        "v": "Package"
+      }, {
+        "v": 0
+      }]
+    }]
+  },
+  "options": {
+    "title": "Product wise sales for each customer",
+    "fill": 20,
+    "isStacked":true,
+    "displayExactValues": false,
+    "animation":{
+        "startup": true,
+        "duration": 700,
+        "easing": "inAndOut"
+    },
+    "legend":{"position":"none"},
+    "colors":["green","purple","blue","orange","yellow","#eee","black","red","blue","green"],
+    "vAxis": {
+      "title": "No of Bookings",
+      "gridlines": {
+        "count": 10
+      }
+    },
+    "hAxis": {
+      "title": "Products"
+    }
+  }
+}

@@ -4,6 +4,8 @@
   "dependencies": {
     "angular-material": "^1.1.4",
     "jquery": "1.12.0",
-    "angular-google-chart": "^0.1.0"
+    "angular-google-chart": "^0.1.0",
+    "angular-gridster": "^0.13.15",
+    "angular-material-icons": "^0.7.1"
   }
 }

@@ -3,16 +3,70 @@
 
     angular
         .module('ngDashboard')
-        .controller('MainController', mainController);
+        .controller('MainController', mainController)
+        .controller("SampleCtrl", function ($scope, $http) {
+
+            $scope.init = function () {
+                $http.get('data.json').success(function (data) {
+                    $scope.chart = data;
+                });
+                $http.get('data1.json').success(function (data) {
+                    $scope.chart1 = data;
+                });
+            };
+
+            $scope.init();
+            $scope.selected = function (selectedItem) {
+                alert("You selected " + $scope.chart.data.cols[selectedItem.column].label + " in " +
+                    $scope.chart.data.rows[selectedItem.row].c[0].v);
+            };
+
+
+            $scope.selected1 = function (selectedItem) {
+                alert("You selected " + $scope.chart1.data.cols[selectedItem.column].label + " in " +
+                    $scope.chart1.data.rows[selectedItem.row].c[0].v);
+            };
+
+            $scope.chartReady = function () {};
+
+
+        });;
 
     mainController.$inject = ['$rootScope', '$scope'];
 
     function mainController($rootScope, $scope) {
         var vm = this;
+        vm.gridsterOptions = {
+            margins: [20, 20],
+            columns: 4,
+            mobileModeEnabled: false,
+            draggable: {
+                handle: 'h3'
+            },
+            resizable: {
+                enabled: true,
+                handles: ['n', 'e', 's', 'w', 'ne', 'se', 'sw', 'nw'],
+
+                // optional callback fired when resize is started
+                start: function (event, $element, widget) {},
+
+                // optional callback fired when item is resized,
+                resize: function (event, $element, widget) {
+                    if (widget.chart.api) widget.chart.api.update();
+                },
+
+                // optional callback fired when item is finished resizing 
+                stop: function (event, $element, widget) {
+                    $timeout(function () {
+                        if (widget.chart.api) widget.chart.api.update();
+                    }, 400)
+                }
+            },
+        };
         vm.title = "Generic Dashboard";
         var chart1 = {};
         chart1.type = "ColumnChart";
-        chart1.cssStyle = "height:200px; width:300px;";
+        // chart1.cssStyle = "height:200px; width:300px;";
         chart1.data = {
             "cols": [{
                     id: "month",
@@ -148,7 +202,9 @@
             // item.maxSizeY
         });
 
-        $scope.$watch(function(){return vm.standardItems;}, function (items) {
+        $scope.$watch(function () {
+            return vm.standardItems;
+        }, function (items) {
             // one of the items changed
             console.log(items);
         }, true);
@@ -174,8 +230,8 @@
         vm.chart = chart1;
 
         vm.standardItems = [{
-                sizeX: 2,
-                sizeY: 1,
+                sizeX: 4,
+                sizeY: 2,
                 row: 0,
                 col: 0
             },
@@ -189,54 +245,6 @@
                 sizeX: 1,
                 sizeY: 1,
                 row: 0,
-                col: 4
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 0,
-                col: 5
-            },
-            {
-                sizeX: 2,
-                sizeY: 1,
-                row: 1,
-                col: 0
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 1,
-                col: 4
-            },
-            {
-                sizeX: 1,
-                sizeY: 2,
-                row: 1,
-                col: 5
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 2,
-                col: 0
-            },
-            {
-                sizeX: 2,
-                sizeY: 1,
-                row: 2,
-                col: 1
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 2,
-                col: 3
-            },
-            {
-                sizeX: 1,
-                sizeY: 1,
-                row: 2,
                 col: 4
             }
         ];

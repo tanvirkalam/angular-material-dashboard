@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <title>
+        Google Charts and AngularJS
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+</head>
+
+<body ng-app="google-chart-sample" ng-cloak="" ng-controller="SampleCtrl">
+
+    <div gridster="gridsterOptions" >
+        <md-card gridster-item="item" ng-repeat="item in standardItems">
+            <md-toolbar class="md-warn" style="border-radius: 3px 3px 0 0">
+                <md-card-header>
+                    <!--<md-card-avatar>
+                                <img class="md-user-avatar" src="image-source">
+                            </md-card-avatar>-->
+                    <md-card-header-text>
+                        <span class="md-title">title</span>
+                        <span class="md-subhead">sub-title</span>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-toolbar>
+
+
+            <!-- <canvas id="doughnut" class="chart chart-doughnut" data="data"
+                      labels="labels"></canvas> -->
+            <!--<div google-chart chart="ctrl.chart"> </div>-->
+
+            <div google-chart chart="item.chart" select="selected(selectedItem)" on-ready="chartReady()"></div>
+
+        </md-card>
+
+    </div>
+    <!--jqyery-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="https:///netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <!--Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+
+
+    <!--Angular material-->
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    
+    <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+
+    <!-- Gridster library-->
+    <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+    <!--Google chart-->
+    <script src="bower_components/angular-google-chart/ng-google-chart.min.js"></script>
+    <script src="app/app1.js"></script>
+</body>
+
+</html>

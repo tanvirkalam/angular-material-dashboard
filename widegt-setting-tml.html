@@ -1,0 +1,80 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+    <!--<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Mango (Fruit)</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>-->
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Overview">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Overview</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque
+              ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est,
+              sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Configuration">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Configuration</h1>
+            <md-content layout-padding>
+              <div>
+                <form name="userForm">
+
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>First name</label>
+                      <input ng-model="widget.chart.type">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
+                      <input ng-model="widget.col">
+                    </md-input-container>
+                  </div>
+
+                  
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>City</label>
+                      <input ng-model="user.city">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>State</label>
+                      <md-select ng-model="user.state">
+                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                          {{state.abbrev}}
+                        </md-option>
+                      </md-select>
+                    </md-input-container>                  
+                  </div>
+                </form>
+              </div>
+            </md-content>
+          </md-content>
+        </md-tab>
+        <md-tab label="Preview">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Preview</h1>
+            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum.
+              Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum
+              nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus
+              commodo lectus.</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>     
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="submit()" style="margin-right:20px;">
+        Close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

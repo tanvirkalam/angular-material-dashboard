@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <title>
+        Google Charts and AngularJS
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+    <style>
+
+    </style>
+</head>
+
+<body ng-app="google-chart-sample" ng-cloak="" ng-controller="SampleCtrl">
+
+    <div gridster="gridsterOptions">
+        <md-card gridster-item="item" ng-repeat="item in standardItems">
+            <md-toolbar class="md-warn" style="border-radius: 3px 3px 0 0;">
+                <div class="md-toolbar-tools">
+                    <!--<md-button class="md-icon-button" aria-label="Settings">
+                       <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon> 
+                    </md-button>-->
+
+                    <h2 flex md-truncate>{{item.chart.options.title}}</h2>
+
+                   <md-button class="md-icon-button" aria-label="settings" ng-click="settingChart($event,item)" aria-label="Settings">
+                       <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon> 
+                    </md-button>
+
+                  <md-button aria-label="delete" class="md-icon-button" aria-label="Settings">
+                       <ng-md-icon icon="delete" style="fill: white" size="24"></ng-md-icon> 
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <!--<md-toolbar class="md-warn" style="border-radius: 3px 3px 0 0; height: 15px;">
+                <md-card-header>                   
+                    <md-card-header-text>
+                        <span class="md-title">title</span>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-toolbar>-->
+            <div flex google-chart chart="item.chart" select="selected(selectedItem)" on-ready="chartReady()"></div>
+        </md-card>
+    </div>
+   
+    <!--jqyery-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="https:///netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <!--Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+
+
+    <!--Angular material-->
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+    <!-- Gridster library-->
+    <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+    <!--Google chart-->
+    <script src="bower_components/angular-google-chart/ng-google-chart.min.js"></script>
+    <script src="app/app1.js"></script>
+</body>
+
+</html>
