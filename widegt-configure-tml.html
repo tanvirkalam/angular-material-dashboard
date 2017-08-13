@@ -1,0 +1,83 @@
+<md-dialog aria-label="Widget Settings">
+  <!--<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Mango (Fruit)</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>-->
+  <md-dialog-content ng-style="$mdMedia('xs') ? { 'width': '320px' } : { 'width': '480px' }" style="max-height:810px;">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Configuration">
+        <md-content class="md-padding">
+          <form name="userForm" ng-submit="submit()">
+            <div layout="row" layout-xs="column" flex>
+              <md-input-container flex>
+                <label>Column Position</label>
+                <input ng-model="widget.col">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Row Position</label>
+                <input ng-model="widget.row">
+              </md-input-container>
+            </div>
+            <div layout="row" layout-xs="column" flex>
+              <md-input-container flex>
+                <label>Size X</label>
+                <input ng-model="widget.sizeX">
+              </md-input-container>
+              <md-input-container flex>
+                <label>size Y</label>
+                <input ng-model="widget.sizeY">
+              </md-input-container>
+            </div>       
+            <div layout="row" layout-xs="column" flex>
+              <md-input-container flex>
+                <label>Chart Provider</label>
+                <md-select ng-model="widget.chartProvider" ng-disabled="true">
+                  <md-option ng-repeat="chartProvider in chartProviders" value="{{chartProvider}}">
+                    <span style="text-transform: uppercase;"> {{chartProvider}}</span>
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div layout="row" layout-xs="column" flex>
+              <md-input-container flex>
+                <label>Chart Type</label>
+                <md-select ng-model="widget.chart.type">
+                  <md-option ng-repeat="chartType in getChartType()" value="{{chartType}}">
+                    <span style="text-transform: uppercase;"> {{chartType}}</span>
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>           
+          </form>
+        </md-content>
+      </md-tab>
+      <md-tab label="Preview">
+        <div google-chart chart="widget.chart"></div>
+        <!--<md-divider></md-divider>          -->
+      </md-tab>
+      <md-tab label="Overview">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Overview</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac
+            dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin
+            consectetur felis nec, feugiat ultricies mi.</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button class="md-raised md-accent" ng-click="cancel()">
+      Cancel
+    </md-button>
+    <md-button class="md-raised md-primary" ng-click="submit($event)" style="margin-right:20px;">
+      Submit
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 
-<head>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
+<head>    
     <title>
         Google Charts and AngularJS
     </title>
@@ -37,26 +35,23 @@
                     <!--<md-button class="md-icon-button" aria-label="Settings">
                        <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon> 
                     </md-button>-->
-
-                    <h3 flex md-truncate>{{item.chart.options.title}}</h3>
+                    <h3 flex md-truncate>  {{item.name}}</h3>
                     <md-divider class="vertical-divider"></md-divider>
-                    <md-button class="md-icon-button" aria-label="settings" ng-click="settingChart($event,item)" aria-label="Settings">
+                    <md-button class="md-icon-button" aria-label="configure" ng-click="ctrl.configureWidget( $event, this, item)" aria-label="configure">
                         <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon>
                     </md-button>
                     <md-divider class="vertical-divider"></md-divider>
-                    <md-button aria-label="delete" class="md-icon-button" aria-label="Settings">
+                    <md-button aria-label="delete" ng-click="ctrl.removeWidget($event,item)" class="md-icon-button" aria-label="Settings">
                         <ng-md-icon icon="delete" style="fill: white" size="24"></ng-md-icon>
                     </md-button>
                 </div>
             </md-toolbar>           
-            <div google-chart chart="item.chart" select="selected(selectedItem)" on-ready="chartReady()"></div>
+            <div google-chart chart="item.chart" select="ctrl.selected(selectedItem)" on-ready="ctrl.chartReady()"></div>
         </md-card>
     </div>
 
     <!--jqyery-->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-    <script src="https:///netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <!--Angular-->
     <script src="bower_components/angular/angular.js"></script>
 
