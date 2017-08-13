@@ -10,6 +10,7 @@
     function MainController($rootScope, $timeout, $mdDialog, DataService) {
         var vm = this;
         var toolBarHeight = 50;
+        vm.googleData;
         //gridster option
         vm.gridsterOptions = {
             columns: 4,
@@ -48,7 +49,7 @@
         var idCounter = 0;
 
         function updateGridsterItem(element, widget) {
-            widget.chart.options.width = element.width();
+            widget.chart.options.width = element.width() - 30;
             widget.chart.options.height = element.height() - toolBarHeight;
         }
 
@@ -58,6 +59,7 @@
 
         function activate() {
             DataService.getFakeData('data').then(function (data) {
+                vm.googleData = data.data;
                 var item = {
                     id: ++idCounter,
                     name: 'Test One',
@@ -73,7 +75,7 @@
                 var item = {
                     id: ++idCounter,
                     name: 'Test Two',
-                    sizeX: 1,
+                    sizeX: 2,
                     sizeY: 1,
                     row: 0,
                     col: 1,
@@ -89,29 +91,15 @@
                     sizeX: 1,
                     sizeY: 1,
                     row: 0,
-                    col: 2,
+                    col: 3,
                     chartProvider: 'google',
                     chart: angular.copy(data.data)
                 };
                 item.chart.type = 'LineChart';
-                vm.dashboardItems.push(item);
+                vm.dashboardItems.push(item);           
 
             });
 
-
-            DataService.getFakeData('data1').then(function (data) {
-                var item = {
-                    id: ++idCounter,
-                    name: 'Test Four',
-                    sizeX: 1,
-                    sizeY: 1,
-                    row: 0,
-                    col: 3,
-                    chartProvider: 'google',
-                    chart: data.data
-                };
-                vm.dashboardItems.push(item);
-            });
         }
 
         vm.removeWidget = function (ev, widget) {
@@ -133,25 +121,26 @@
         }
 
         vm.configureWidget = function configureWidget(ev, gridster, widget) {
-            showWidgetDialog(ev, widget, function(){
+            showWidgetDialog(ev, widget, function () {
                 updateGridsterItem(gridster.gridsterItem.$element, widget);
             });
         }
 
         vm.AddWidget = function (ev) {
+            console.log(vm.googleData)
             var widget = {
                 id: ++idCounter,
                 name: 'Test Add',
                 sizeX: 1,
-                sizeY: 1,               
+                sizeY: 1,
                 chartProvider: 'google',
-                chart: undefined
+                chart: vm.googleData
             };
-             showWidgetDialog(ev, widget, function(){
-               // updateGridsterItem(gridster.gridsterItem.$element, widget);
-               vm.dashboardItems.push(widget);
+            showWidgetDialog(ev, widget, function () {
+                // updateGridsterItem(gridster.gridsterItem.$element, widget);
+                vm.dashboardItems.push(widget);
             });
-            
+
         }
 
         function showWidgetDialog(ev, widget, callback) {
@@ -169,8 +158,8 @@
                     fullscreen: false // Only for -xs, -sm breakpoints.
                 })
                 .then(function (item) {
-                    if(typeof callback === 'function')
-                        callback();                    
+                    if (typeof callback === 'function')
+                        callback();
                 }, function () {});
         }
 
@@ -193,7 +182,7 @@
                 switch ($scope.widget.chartProvider) {
                     //google charts types array
                     case 'google':
-                        return ['AnnotationChart', 'BarChart', 'ColumnChart', 'Gauge', 'AreaChart', 'PieChart'];
+                        return ['BarChart', 'ColumnChart', 'Gauge', 'AreaChart', 'PieChart'];
                 }
 
             }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" ng-app="ngDashboard" ng-controller="MainController as ctrl">
 
 <head>
     <title>
@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
     <style>
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak {
+            display: none !important;
+        }
+
         .vertical-divider {
             border-top-width: 0;
             border-right-width: 1px;
@@ -32,7 +41,7 @@
         }
 
         .float-side-menu {
-            position: fixed;            
+            position: fixed;
             right: -189px;
             z-index: 9999;
             width: 189px;
@@ -42,7 +51,7 @@
             background: #e9e4e4;
         }
 
-       
+
 
         .float-side-menu .button {
             width: 25px;
@@ -64,13 +73,13 @@
     </style>
 </head>
 
-<body ng-app="ngDashboard" ng-cloak="" ng-controller="MainController as ctrl">
+<body ng-cloak="">
 
     <!--add widget-->
     <div class="float-side-menu" style="top: 50px">
         <div class="button" ng-click="ctrl.AddWidget($event)">
             <ng-md-icon icon="add" style="fill: white" size="24"></ng-md-icon>
-        </div>       
+        </div>
     </div>
     <!-- side menu for configuration-->
     <div class="float-side-menu" style="top: 95px" hide-xs ng-class="{ 'active' : menu}">
@@ -82,12 +91,10 @@
         </md-content>
     </div>
     <div gridster="ctrl.gridsterOptions">
+
         <md-card gridster-item="item" ng-repeat="item in ctrl.dashboardItems">
             <md-toolbar class="md-primary md-hue-1">
                 <div class="md-toolbar-tools">
-                    <!--<md-button class="md-icon-button" aria-label="Settings">
-                       <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon> 
-                    </md-button>-->
                     <h3 flex md-truncate> {{item.name}}</h3>
                     <md-divider class="vertical-divider"></md-divider>
                     <md-button class="md-icon-button" aria-label="configure" ng-click="ctrl.configureWidget( $event, this, item)" aria-label="configure">
@@ -99,7 +106,8 @@
                     </md-button>
                 </div>
             </md-toolbar>
-            <div google-chart chart="item.chart" select="ctrl.selected(selectedItem)" on-ready="ctrl.chartReady()"></div>
+            {{gridster.gridsterItem }}
+            <div google-chart chart="item.chart" style="{{gridsterItem.$element.height()" select="ctrl.selected(selectedItem)" on-ready="ctrl.chartReady()"></div>
         </md-card>
     </div>
 

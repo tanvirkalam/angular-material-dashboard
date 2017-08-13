@@ -22,11 +22,11 @@
             <div layout="row" layout-xs="column" flex>
               <md-input-container flex>
                 <label>Column Position</label>
-                <input ng-model="form.col" type="number" ng-required="true">
+                <input ng-model="form.col" type="number">
               </md-input-container>
               <md-input-container flex>
                 <label>Row Position</label>
-                <input ng-model="form.row" type="number" ng-required="true">
+                <input ng-model="form.row" type="number">
               </md-input-container>
             </div>
             <div layout="row" layout-xs="column" flex>
@@ -76,7 +76,6 @@
       </md-tab>
     </md-tabs>
   </md-dialog-content>
-
   <md-dialog-actions layout="row">
     <span flex></span>
     <md-button class="md-raised md-accent" ng-click="cancel()">

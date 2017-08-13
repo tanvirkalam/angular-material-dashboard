@@ -8,6 +8,7 @@
   },
   "author": "Tanvir Kalam",
   "license": "ISC",
-  "dependencies": {    
+  "dependencies": {
+    "gulp": "^3.9.1"
   }
 }
