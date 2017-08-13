@@ -38,11 +38,6 @@
 
                 // optional callback fired when item is finished resizing 
                 stop: function (event, element, widget) {
-
-                    //widget.chart.type = widget.chart.type;
-                    console.log(element, widget);
-                    //      googleService.getReadyPromise()
-                    // .then(draw);               
                     $timeout(function () {
                         updateGridsterItem(element, widget);
                     }, 700);
@@ -119,7 +114,7 @@
             });
         }
 
-          vm.removeWidget = function (ev, widget) {
+        vm.removeWidget = function (ev, widget) {
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Would you like to remove this widget?')
@@ -137,29 +132,34 @@
 
         }
 
-        vm.selected = function (selectedItem) {
-            console.log(selectedItem);
-            // alert("You selected " + $scope.chart.data.cols[selectedItem.column].label + " in " +
-            //     $scope.chart.data.rows[selectedItem.row].c[0].v);
-        };
+        vm.configureWidget = function configureWidget(ev, gridster, widget) {
+            showWidgetDialog(ev, widget, function(){
+                updateGridsterItem(gridster.gridsterItem.$element, widget);
+            });
+        }
 
+        vm.AddWidget = function (ev) {
+            var widget = {
+                id: ++idCounter,
+                name: 'Test Add',
+                sizeX: 1,
+                sizeY: 1,               
+                chartProvider: 'google',
+                chart: undefined
+            };
+             showWidgetDialog(ev, widget, function(){
+               // updateGridsterItem(gridster.gridsterItem.$element, widget);
+               vm.dashboardItems.push(widget);
+            });
+            
+        }
 
-        vm.selected1 = function (selectedItem) {
-            // alert("You selected " + $scope.chart1.data.cols[selectedItem.column].label + " in " +
-            //     $scope.chart1.data.rows[selectedItem.row].c[0].v);
-        };
-
-        vm.chartReady = function () {};
-
-        vm.configureWidget = function configureWidget(ev, gridster, widget) {            
+        function showWidgetDialog(ev, widget, callback) {
             $mdDialog.show({
                     controller: DialogController,
                     resolve: {
                         widget: function () {
                             return widget;
-                        },
-                        gridster: function () {
-                            return gridster;
                         }
                     },
                     templateUrl: '../widegt-configure-tml.html',
@@ -169,21 +169,23 @@
                     fullscreen: false // Only for -xs, -sm breakpoints.
                 })
                 .then(function (item) {
-                    
-                    for (var i = 0; i < vm.dashboardItems.length; i++) {
-                        if (item.id == vm.dashboardItems[i].id) {                         
-                            vm.dashboardItems[i] = item;
-                            updateGridsterItem(gridster.gridsterItem.$element, widget);
-                            break;
-                        }
-                    }
-
+                    if(typeof callback === 'function')
+                        callback();                    
                 }, function () {});
         }
-      
 
-        function DialogController($scope, $mdDialog, widget, gridster) {            
-            $scope.widget = widget;// angular.extend({},widget);
+        function DialogController($scope, $mdDialog, widget) {
+            $scope.widget = widget;
+            $scope.form = {
+                name: widget.name,
+                sizeX: widget.sizeX,
+                sizeY: widget.sizeY,
+                col: widget.col,
+                row: widget.row,
+                chartProvider: widget.chartProvider,
+                chart: angular.copy(widget.chart)
+            };
+
             $scope.chartProviders = ['google', 'chartjs', 'chartlist'];
             //get chart type by chart provider
             $scope.getChartType = function () {
@@ -196,12 +198,10 @@
 
             }
             $scope.cancel = function () {
-                $scope.widget = oldWidget;
                 $mdDialog.cancel();
             };
-            $scope.submit = function (ev) {                
-                widget.chart.options.sizeX = gridster.gridsterItem.getElementSizeX();
-                widget.chart.options.sizeY = gridster.gridsterItem.getElementSizeY();
+            $scope.submit = function (ev) {
+                angular.extend(widget, $scope.form);
                 $mdDialog.hide(widget);
             };
         };

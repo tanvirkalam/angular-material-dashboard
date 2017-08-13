@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 
-<head>    
+<head>
     <title>
         Google Charts and AngularJS
     </title>
@@ -23,19 +23,72 @@
             cursor: move;
             font-size: 16px;
         }
+
+        .float-side-menu.active {
+            transform: translateX(-189px);
+            -ms-transform: translateX(-189px);
+            -o-transform: translateX(-189px);
+            -webkit-transform: translateX(-189px);
+        }
+
+        .float-side-menu {
+            position: fixed;            
+            right: -189px;
+            z-index: 9999;
+            width: 189px;
+            -webkit-transition: transform .5s ease;
+            -o-transition: transform .5s ease;
+            transition: transform .5s ease;
+            background: #e9e4e4;
+        }
+
+       
+
+        .float-side-menu .button {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            left: -40px;
+            top: 1px;
+            background: #28a6a8;
+            padding: 7px;
+            z-index: 111;
+            cursor: pointer;
+        }
+
+        .float-side-menu .menu-content {
+            border: 1px solid #28a6a8;
+            max-height: 400px;
+            height: 300px;
+        }
     </style>
 </head>
 
 <body ng-app="ngDashboard" ng-cloak="" ng-controller="MainController as ctrl">
 
+    <!--add widget-->
+    <div class="float-side-menu" style="top: 50px">
+        <div class="button" ng-click="ctrl.AddWidget($event)">
+            <ng-md-icon icon="add" style="fill: white" size="24"></ng-md-icon>
+        </div>       
+    </div>
+    <!-- side menu for configuration-->
+    <div class="float-side-menu" style="top: 95px" hide-xs ng-class="{ 'active' : menu}">
+        <div class="button" ng-model="menu" ng-click="menu =!menu">
+            <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon>
+        </div>
+        <md-content class="md-padding menu-content">
+            test
+        </md-content>
+    </div>
     <div gridster="ctrl.gridsterOptions">
         <md-card gridster-item="item" ng-repeat="item in ctrl.dashboardItems">
-            <md-toolbar class="md-warn">
+            <md-toolbar class="md-primary md-hue-1">
                 <div class="md-toolbar-tools">
                     <!--<md-button class="md-icon-button" aria-label="Settings">
                        <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon> 
                     </md-button>-->
-                    <h3 flex md-truncate>  {{item.name}}</h3>
+                    <h3 flex md-truncate> {{item.name}}</h3>
                     <md-divider class="vertical-divider"></md-divider>
                     <md-button class="md-icon-button" aria-label="configure" ng-click="ctrl.configureWidget( $event, this, item)" aria-label="configure">
                         <ng-md-icon icon="settings" style="fill: white" size="24"></ng-md-icon>
@@ -45,7 +98,7 @@
                         <ng-md-icon icon="delete" style="fill: white" size="24"></ng-md-icon>
                     </md-button>
                 </div>
-            </md-toolbar>           
+            </md-toolbar>
             <div google-chart chart="item.chart" select="ctrl.selected(selectedItem)" on-ready="ctrl.chartReady()"></div>
         </md-card>
     </div>

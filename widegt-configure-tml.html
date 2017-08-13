@@ -12,31 +12,37 @@
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Configuration">
         <md-content class="md-padding">
-          <form name="userForm" ng-submit="submit()">
+          <form name="widgetForm" ng-submit="submit()">
+            <div layout="row" layout-align="start center" layout-xs="column" flex>
+              <md-input-container flex>
+                <label>Widget Name</label>
+                <input ng-model="form.name" type="text" ng-required="true">
+              </md-input-container>
+            </div>
             <div layout="row" layout-xs="column" flex>
               <md-input-container flex>
                 <label>Column Position</label>
-                <input ng-model="widget.col">
+                <input ng-model="form.col" type="number" ng-required="true">
               </md-input-container>
               <md-input-container flex>
                 <label>Row Position</label>
-                <input ng-model="widget.row">
+                <input ng-model="form.row" type="number" ng-required="true">
               </md-input-container>
             </div>
             <div layout="row" layout-xs="column" flex>
               <md-input-container flex>
                 <label>Size X</label>
-                <input ng-model="widget.sizeX">
+                <input ng-model="form.sizeX" type="number" ng-required="true">
               </md-input-container>
               <md-input-container flex>
                 <label>size Y</label>
-                <input ng-model="widget.sizeY">
+                <input ng-model="form.sizeY" type="number" ng-required="true">
               </md-input-container>
-            </div>       
+            </div>
             <div layout="row" layout-xs="column" flex>
               <md-input-container flex>
                 <label>Chart Provider</label>
-                <md-select ng-model="widget.chartProvider" ng-disabled="true">
+                <md-select ng-model="form.chartProvider" ng-disabled="true" ng-required="true">
                   <md-option ng-repeat="chartProvider in chartProviders" value="{{chartProvider}}">
                     <span style="text-transform: uppercase;"> {{chartProvider}}</span>
                   </md-option>
@@ -46,18 +52,18 @@
             <div layout="row" layout-xs="column" flex>
               <md-input-container flex>
                 <label>Chart Type</label>
-                <md-select ng-model="widget.chart.type">
+                <md-select ng-model="form.chart.type" ng-required="true">
                   <md-option ng-repeat="chartType in getChartType()" value="{{chartType}}">
                     <span style="text-transform: uppercase;"> {{chartType}}</span>
                   </md-option>
                 </md-select>
               </md-input-container>
-            </div>           
+            </div>
           </form>
         </md-content>
       </md-tab>
       <md-tab label="Preview">
-        <div google-chart chart="widget.chart"></div>
+        <div google-chart chart="form.chart"></div>
         <!--<md-divider></md-divider>          -->
       </md-tab>
       <md-tab label="Overview">
@@ -75,8 +81,8 @@
     <span flex></span>
     <md-button class="md-raised md-accent" ng-click="cancel()">
       Cancel
-    </md-button>
-    <md-button class="md-raised md-primary" ng-click="submit($event)" style="margin-right:20px;">
+    </md-button>   
+    <md-button class="md-raised md-primary" ng-disabled="widgetForm.$invalid" ng-click="submit($event)" style="margin-right:20px;">
       Submit
     </md-button>
   </md-dialog-actions>

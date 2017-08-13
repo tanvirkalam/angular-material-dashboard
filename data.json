@@ -76,6 +76,7 @@
         "count": 10
       }
     },
+    "legend": { "position": "bottom" },
     "hAxis": {
       "title": "Products"
     }
